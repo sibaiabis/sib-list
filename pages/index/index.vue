@@ -9,7 +9,7 @@
 		<!-- @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" 此三个方法必须写 -->
 		<view class="list" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
 			<!-- ref="sibList" @isRefresh='isRefresh' @scrolltolowerFn="scrolltolowerFn" 此三个必须写 -->
-			<sib-list ref="sibList" @isRefresh='isRefresh' @scrolltolowerFn="scrolltolowerFn">
+			<sib-list ref="sibList" @isRefresh='isRefresh' @scrolltolowerFn="scrolltolowerFn" :isNotMore="isNotMore" :notMoreText="notMoreText">
 				<!-- 内部block可自定义 -->
 				<block class="" slot="sibScrollList">
 					<view class="" v-for="(item, index) in list" :key="index">
@@ -35,7 +35,9 @@
 				list: [
 					'原始数据1', '原始数据2', '原始数据3', '原始数据4',
 					'原始数据5', '原始数据6', '原始数据7', '原始数据8'
-				]
+				],
+				isNotMore: false,
+				notMoreText: ''
 			}
 		},
 		components: {
@@ -64,6 +66,8 @@
 						'初始数据5', '初始数据6'
 					]
 					_this.list = defaultData
+					// 切记下拉刷新要把[没有更多]状态更新
+					_this.isNotMore = false
 					// 刷新结束调用
 					this.$refs.sibList.endAfter()
 				}, 1000)
@@ -81,6 +85,10 @@
 						'新数据1', '新数据2', '新数据3', '新数据4'
 					]
 					_this.list = _this.list.concat(newData)
+					if(_this.list.length > 20) {
+						_this.isNotMore = true
+						_this.notMoreText = '我是有底线的...'
+					}
 					console.log(_this.list)
 					uni.hideLoading()
 				}, 1000)

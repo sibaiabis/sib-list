@@ -25,7 +25,9 @@
 				<!-- 暂无数据 -->
 				<view class='noCard' v-if="isNoList">{{noListText}}</view>
 				<!-- 底部提示 -->
-				<view class="floter" v-if="!isNoList">{{floterText}}</view>
+				<view class="floter" v-if="!isNoList && !isNotMore">{{floterText}}</view>
+				<!-- 没有更多提示 -->
+				<view class="floter" v-if="isNotMore">{{notMoreText}}</view>
 			</scroll-view>
 		</view>
 
@@ -75,6 +77,14 @@
 			isGtHeight: {
 				type: [Number, String],
 				default: 1000
+			},
+			isNotMore: {
+				type: [Boolean, String],
+				default: false
+			},
+			notMoreText: {
+				type: [String, String],
+				default: '没有更多了...'
 			}
 		},
 		data() {
@@ -135,6 +145,7 @@
 			},
 			// 触底
 			scrolltolower: function(e) {
+				if(this.isNotMore) return
 				this.$emit('scrolltolowerFn');
 			},
 			// 回到顶部
