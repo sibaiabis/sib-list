@@ -3,7 +3,7 @@
 参考自: <a href="https://ext.dcloud.net.cn/plugin?id=443">https://ext.dcloud.net.cn/plugin?id=443</a>
 
 <h2>插件预览图</h2>
-<img src="https://github.com/gameruleCEO/sib-list/blob/master/other/sib-list.gif" />
+<img src="https://raw.githubusercontent.com/gameruleCEO/sib-list/master/other/sib-list.gif" />
 
 <h2>使用教程</h2>
 <ul>
